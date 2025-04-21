@@ -1,3 +1,4 @@
+
 // src/app/about/page.tsx
 'use client'
 
@@ -6,6 +7,11 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
+
+// Crear componentes Motion tipados para elementos HTML
+const MotionH1 = motion('h1')
+const MotionH2 = motion('h2')
+const MotionP = motion('p')
 
 // Timeline de hitos de la empresa
 const timeline = [
@@ -40,7 +46,7 @@ export default function AboutPage() {
       size: { value: { min: 5, max: 15 }, random: true },
       move: { enable: true, speed: 0.5, direction: 'top', outModes: { default: 'out' } },
       opacity: { value: 0.3, random: { enable: true, minimumValue: 0.1 } },
-      color: { value: ['#BBAC97', '#A1A0A0', '#E9E4E3'] },
+      color: { value: ['#6d28d9', '#1e40af', '#9333ea'] },
     },
     interactivity: {
       events: {
@@ -59,24 +65,23 @@ export default function AboutPage() {
     <main className="relative overflow-hidden bg-black text-white py-20 px-4">
       {/* Fondo de partículas hexagonales */}
       <Particles
-  id="about-particles"
-  init={async (engine: Engine) => await loadFull(engine)}
-  // Usamos un casting a any para esquivar errores de tipo en build
-  options={particlesOptions as any}
-  className="absolute inset-0 z-0 pointer-events-none"
-  style={{ position: 'absolute' }}
-/>
+        id="about-particles"
+        init={async (engine: Engine) => await loadFull(engine)}
+        options={particlesOptions as any}
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{ position: 'absolute' }}
+      />
 
       <div className="relative z-10 max-w-4xl mx-auto mb-20">
-        <motion.h1
+        <MotionH1
           className="text-5xl font-bold text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           Sobre Kaos Project
-        </motion.h1>
-        <motion.p
+        </MotionH1>
+        <MotionP
           className="text-center text-lg text-gray-200"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -85,7 +90,7 @@ export default function AboutPage() {
           En Kaos Project combinamos creatividad y tecnología para transformar
           ideas en experiencias visuales memorables. Nuestro equipo trabaja
           en cada detalle para que cada proyecto sea único.
-        </motion.p>
+        </MotionP>
       </div>
 
       <section className="relative z-10 max-w-4xl mx-auto mb-20">
@@ -109,7 +114,7 @@ export default function AboutPage() {
       </section>
 
       <section className="relative z-10 max-w-5xl mx-auto">
-        <motion.h2
+        <MotionH2
           className="text-3xl font-bold mb-12 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +122,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
         >
           Nuestro Equipo
-        </motion.h2>
+        </MotionH2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {team.map((t, i) => (
             <motion.div
@@ -142,3 +147,4 @@ export default function AboutPage() {
     </main>
   )
 }
+
