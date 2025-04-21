@@ -6,9 +6,11 @@ import dynamic from 'next/dynamic'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
 import { motion } from 'framer-motion'
+import type { HTMLMotionProps } from 'framer-motion'
+import Image from 'next/image'
+import logo from '/public/logo.png'  // Asegúrate de tener tu logo en public/logo.png
 
-
-// Componente Tipado h1 animado con Framer Motion
+// Componente animado h1 (cast any para className)
 const MotionH1: any = motion.h1
 
 // Import dinámico de Particles para evitar SSR
@@ -18,7 +20,6 @@ const Particles = dynamic(
 )
 
 export default function Hero() {
-  // Opciones de partículas de fondo
   const backOptions = {
     fullScreen: { enable: false },
     particles: {
@@ -37,25 +38,23 @@ export default function Hero() {
     detectRetina: true,
   }
 
-  // Opciones de partículas frontales
-  
-const frontOptions = {
-  fullScreen: {  enable: true },
-  particles: {
-    number: { value: 200, density: { enable: true, area: 800 }},
-    color: { value: '#000000' }, // Partículas negras en primer plano
-    shape: { type: 'circle' },
-    size: { value: { min: 2, max: 6 }, random: true },
-    move: { enable: true, speed: 0.5 },
-    links: { enable: false },
-    opacity: { value: 0.7, random: true },
-  },
-  interactivity: {
-    events: { onHover: { enable: true, mode: 'repulse' } },
-    modes: { repulse: { distance: 80 } },
-  },
-  detectRetina: true,
-}
+  const frontOptions = {
+    fullScreen: { enable: false },
+    particles: {
+      number: { value: 80, density: { enable: true, area: 800 } },
+      color: { value: '#000000' },
+      shape: { type: 'circle' },
+      size: { value: { min: 2, max: 6 }, random: true },
+      move: { enable: true, speed: 0.5 },
+      links: { enable: false },
+      opacity: { value: 0.7, random: true },
+    },
+    interactivity: {
+      events: { onHover: { enable: true, mode: 'repulse' } },
+      modes: { repulse: { distance: 80 } },
+    },
+    detectRetina: true,
+  }
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
@@ -70,8 +69,12 @@ const frontOptions = {
       {/* Overlay semitransparente */}
       <div className="absolute inset-0 bg-black/20 z-10" />
 
-      {/* Texto hero */}
-      <div className="relative z-20 flex items-center justify-center h-full px-4">
+      {/* Contenido principal */}
+      <div className="relative z-20 flex flex-col items-center justify-center h-full px-4">
+        {/* Logo en el Hero */}
+        <Image src={logo} alt="Kaos Project Logo" width={540} height={240} className="mb-8" />
+
+        {/* Texto con animación */}
         <MotionH1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
