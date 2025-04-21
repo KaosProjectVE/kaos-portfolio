@@ -6,15 +6,15 @@ import dynamic from 'next/dynamic'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
 import { motion } from 'framer-motion'
-import type { HTMLMotionProps } from 'framer-motion'
 import Image from 'next/image'
-import logo from '/public/logo.png'  // Asegúrate de tener tu logo en public/logo.png
+import logo from '/public/logo.png'  // Asegúrate de que logo.png esté en public/
 
-// Componente animado h1 (cast any para className)
+// Cast rápidos para evitar errores de className en Motion
+const MotionDiv: any = motion.div
 const MotionH1: any = motion.h1
 
-// Import dinámico de Particles para evitar SSR
-const Particles = dynamic(
+// Import dinámico de react-tsparticles para evitar SSR
+const Particles: any = dynamic(
   () => import('react-tsparticles').then((mod) => mod.Particles),
   { ssr: false }
 )
@@ -71,10 +71,17 @@ export default function Hero() {
 
       {/* Contenido principal */}
       <div className="relative z-20 flex flex-col items-center justify-center h-full px-4">
-        {/* Logo en el Hero */}
-        <Image src={logo} alt="Kaos Project Logo" width={540} height={240} className="mb-8" />
+        {/* Logo con animación sutil */}
+        <MotionDiv
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="mb-8"
+        >
+          <Image src={logo} alt="Kaos Project Logo" width={540} height={120} />
+        </MotionDiv>
 
-        {/* Texto con animación */}
+        {/* Texto hero con animación */}
         <MotionH1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
