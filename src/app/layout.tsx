@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import './global.css'              // <― esto carga Tailwind
 import { Poppins } from 'next/font/google'
+import CustomCursor from '@/components/customcursor'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,7 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={poppins.variable}>
-      <body className="bg-black text-white font-sans">
+      <body className="bg-black text-white font-sans, cursor-none">
+      <CustomCursor />
         {children}
       </body>
     </html>
