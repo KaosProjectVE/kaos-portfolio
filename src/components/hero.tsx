@@ -6,10 +6,10 @@ import dynamic from 'next/dynamic'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
 import { motion } from 'framer-motion'
-import type { HTMLMotionProps } from 'framer-motion'
+
 
 // Componente Tipado h1 animado con Framer Motion
-const MotionH1 = motion.h1 as React.FC<HTMLMotionProps<'h1'>>
+const MotionH1: any = motion.h1
 
 // Import dinámico de Particles para evitar SSR
 const Particles = dynamic(
