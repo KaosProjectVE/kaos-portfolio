@@ -59,12 +59,13 @@ export default function AboutPage() {
     <main className="relative overflow-hidden bg-black text-white py-20 px-4">
       {/* Fondo de partículas hexagonales */}
       <Particles
-        id="about-particles"
-        init={async (engine: Engine) => await loadFull(engine)}
-        options={particlesOptions}
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{ position: 'absolute' }}
-      />
+  id="about-particles"
+  init={async (engine: Engine) => await loadFull(engine)}
+  // Usamos un casting a any para esquivar errores de tipo en build
+  options={particlesOptions as any}
+  className="absolute inset-0 z-0 pointer-events-none"
+  style={{ position: 'absolute' }}
+/>
 
       <div className="relative z-10 max-w-4xl mx-auto mb-20">
         <motion.h1
