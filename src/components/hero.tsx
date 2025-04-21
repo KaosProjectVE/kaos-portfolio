@@ -8,19 +8,17 @@ import type { Engine } from 'tsparticles-engine'
 import { motion } from 'framer-motion'
 import type { HTMLMotionProps } from 'framer-motion'
 
-// Typing para <h1> animado con Framer Motion
-type MotionH1Props = HTMLMotionProps<'h1'>
-const MotionH1 = motion.h1 as React.FC<MotionH1Props>
+// Componente Tipado h1 animado con Framer Motion
+const MotionH1 = motion.h1 as React.FC<HTMLMotionProps<'h1'>>
 
-// Import dinámico de react-tsparticles para evitar SSR
-type ParticlesType = typeof import('react-tsparticles').Particles
-const Particles = dynamic<ParticlesType>(
+// Import dinámico de Particles para evitar SSR
+const Particles = dynamic(
   () => import('react-tsparticles').then((mod) => mod.Particles),
   { ssr: false }
 )
 
 export default function Hero() {
-  // Partículas de fondo
+  // Opciones de partículas de fondo
   const backOptions = {
     fullScreen: { enable: false },
     particles: {
@@ -39,7 +37,7 @@ export default function Hero() {
     detectRetina: true,
   }
 
-  // Partículas en primer plano sobre el texto
+  // Opciones de partículas frontales
   
 const frontOptions = {
   fullScreen: {  enable: true },
@@ -58,6 +56,7 @@ const frontOptions = {
   },
   detectRetina: true,
 }
+
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
       {/* Partículas de fondo */}
@@ -71,7 +70,7 @@ const frontOptions = {
       {/* Overlay semitransparente */}
       <div className="absolute inset-0 bg-black/20 z-10" />
 
-      {/* Texto hero con animación */}
+      {/* Texto hero */}
       <div className="relative z-20 flex items-center justify-center h-full px-4">
         <MotionH1
           initial={{ opacity: 0, y: 30 }}
