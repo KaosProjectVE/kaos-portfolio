@@ -1,4 +1,3 @@
-
 // src/app/about/page.tsx
 'use client'
 
@@ -7,11 +6,17 @@ import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { loadFull } from 'tsparticles'
 import type { Engine } from 'tsparticles-engine'
+import type { MotionProps } from 'framer-motion'
+import type { HTMLAttributes } from 'react'
 
-// Crear componentes Motion tipados para elementos HTML
-const MotionH1 = motion('h1')
-const MotionH2 = motion('h2')
-const MotionP = motion('p')
+// Definiciones de tipos para Motion + HTML props
+type MotionH1Type = HTMLAttributes<HTMLHeadingElement> & MotionProps
+type MotionH2Type = HTMLAttributes<HTMLHeadingElement> & MotionProps
+type MotionPType  = HTMLAttributes<HTMLParagraphElement> & MotionProps
+
+const MotionH1 = motion.h1 as React.FC<MotionH1Type>
+const MotionH2 = motion.h2 as React.FC<MotionH2Type>
+const MotionP  = motion.p  as React.FC<MotionPType>
 
 // Timeline de hitos de la empresa
 const timeline = [
@@ -36,7 +41,7 @@ const Particles = dynamic(
 )
 
 export default function AboutPage() {
-  // Configuración única de partículas (formas hexagonales flotantes)
+  // Configuración de partículas (hexagonales flotantes)
   const particlesOptions = {
     fullScreen: { enable: false },
     background: { color: { value: '#000000' } },
@@ -69,9 +74,9 @@ export default function AboutPage() {
         init={async (engine: Engine) => await loadFull(engine)}
         options={particlesOptions as any}
         className="absolute inset-0 z-0 pointer-events-none"
-        style={{ position: 'absolute' }}
       />
 
+      {/* Introducción */}
       <div className="relative z-10 max-w-4xl mx-auto mb-20">
         <MotionH1
           className="text-5xl font-bold text-center mb-8"
@@ -93,6 +98,7 @@ export default function AboutPage() {
         </MotionP>
       </div>
 
+      {/* Timeline */}
       <section className="relative z-10 max-w-4xl mx-auto mb-20">
         {timeline.map((item, i) => (
           <motion.div
@@ -113,6 +119,7 @@ export default function AboutPage() {
         ))}
       </section>
 
+      {/* Equipo */}
       <section className="relative z-10 max-w-5xl mx-auto">
         <MotionH2
           className="text-3xl font-bold mb-12 text-center"
@@ -147,4 +154,3 @@ export default function AboutPage() {
     </main>
   )
 }
-
