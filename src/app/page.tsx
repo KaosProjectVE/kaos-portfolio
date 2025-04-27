@@ -8,7 +8,8 @@ import Services from '@/components/services'
 import PortfolioGrid from '@/components/portoliogrid'
 import AboutPage from './about/page'
 import { AnimatePresence, motion } from 'framer-motion'
-// Motion container para animaciones de entrada/salida
+import Timeline from '@/components/timeline'
+import ContactCTA from '@/components/contact'
 // Motion container para animaciones de entrada/salida
 const MotionContainer: any = motion.div
 
@@ -41,7 +42,10 @@ export default function Page() {
         <Services />
         <PortfolioGrid />
         <AboutPage />
+        <Timeline/>
+        <ContactCTA/>
       </MotionContainer>
+      
     </>
   )
 }
